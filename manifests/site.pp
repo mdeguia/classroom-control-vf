@@ -51,6 +51,6 @@ node default {
       owner =>  'root',
       group =>  'root',
       mode  =>  '0644',
-      content => 'Using puppet to manage MOTD\n',
+      content => "Using puppet to manage MOTD\n",
       }
 }
