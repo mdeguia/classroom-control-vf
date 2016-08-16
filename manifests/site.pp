@@ -45,12 +45,17 @@ node default {
   # notify { "Hello, my name is ${::hostname}": }
     notify { "Test message for release v1.0.0.3": }
     
-    file { 'motd' :
-      ensure => file,
-      path  =>  '/etc/motd',
-      owner =>  'root',
-      group =>  'root',
-      mode  =>  '0644',
-      content => "Using puppet to manage MOTD\n",
-      }
+#    file { 'motd' :
+#      ensure => file,
+#      path  =>  '/etc/motd',
+#      owner =>  'root',
+#      group =>  'root',
+#      mode  =>  '0644',
+#     content => "Using puppet to manage MOTD\n",
+#     }
+
+    exec { "cowsay 'Welcome to ${::fqdn}!' > /etc/motd":
+      path => '/usr/bin:/usr/local/bin',
+      creates => '/etc/motd',
+    }
 }
