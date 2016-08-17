@@ -10,4 +10,4 @@ fi
 
 # User specific aliases and functions
 
-cowsay 'Yo! What's up?'
+cowsay "Yo! What's up?"
