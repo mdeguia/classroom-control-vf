@@ -6,17 +6,12 @@ class nginx {
   
   file { '/var/www':
     ensure  =>  directory,
-    requires  =>  Package['nginx'],
-  }
-  
-  file { '/etc/nginx':
-    ensure  =>  directory,
-    requires  =>  Package['nginx'],
   }
   
   file { '/etc/nginx/nginx.conf':
     ensure  =>  file,
     source  => 'puppet:///modules/nginx/nginx.conf',
+    requires  =>  Package['nginx'],
   }
   
   file { '/etc/nginx/conf.d':
@@ -26,6 +21,7 @@ class nginx {
   file { '/etc/nginx/conf.d/default.conf':
     ensure  =>  file,
     source  =>  'puppet:///modules/nginx/default.conf',
+    requires  =>  Package['nginx'],
   }
   
   file  { '/var/www/index.html':
