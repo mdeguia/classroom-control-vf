@@ -42,8 +42,8 @@ node default {
   # This is where you can declare classes for all nodes.
   # Example:
   #   class { 'my_class': }
-  # notify { "Hello, my name is ${::hostname}": }
-    notify { "Test message for release v1.0.0.3": }
+   notify { "Hello, my name is ${::hostname}": }
+  #  notify { "Test message for release v1.0.0.3": }
     
 #    file { 'motd' :
 #      ensure => file,
@@ -64,7 +64,7 @@ node default {
 #      ip => '127.0.0.1',
 #    }
 
-include users
-include skeleton
+# include users
+# include skeleton
 
   }
