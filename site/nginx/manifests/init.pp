@@ -1,6 +1,6 @@
 class nginx {
   
-  case $::family {
+  case $::osfamily {
     'RedHat','Debian' : {
       $package = 'nginx'
       $owner = 'root'
@@ -19,8 +19,14 @@ class nginx {
       $logdir = 'C:/ProgramData/nginx/logs'
  }
  default : {
-    notify { "This ${::family} is not supported. Rebuild your machine."},
+    notify { "This ${::osfamily} is not supported. Rebuild your machine."},
   }
+  
+$user = $::osfamily ? {
+ 'redhat' => 'nginx',
+ 'debian' => 'www-data',
+ 'windows' => 'nobody',
+ }
 
   
   File {
