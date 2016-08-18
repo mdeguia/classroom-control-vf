@@ -8,7 +8,7 @@ class nginx {
       $docroot = '/var/www'
       $confdir = '/etc/nginx'
       $logdir = '/var/log/nginx'
- }
+    }
  
     'Windows' : {
       $package = 'nginx-service'
@@ -17,9 +17,10 @@ class nginx {
       $docroot = 'C:/ProgramData/nginx/html'
       $confdir = 'C:/ProgramData/nginx'
       $logdir = 'C:/ProgramData/nginx/logs'
- }
+    }
  default : {
     notify { "This ${::osfamily} is not supported. Rebuild your machine.": },
+    }
   }
   
 $user = $::osfamily ? {
@@ -63,6 +64,5 @@ $user = $::osfamily ? {
     enable =>  true,
     subscribe => File["${confdir}/nginx.conf","${confdir}/conf.d/default.conf"],
   }
+}
 
-}
-}
