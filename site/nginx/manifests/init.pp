@@ -32,8 +32,8 @@ $user = $::osfamily ? {
 
   
   File {
-    owner =>  '$owner',
-    group =>  '$group',
+    owner =>  "$owner",
+    group =>  "$group",
     mode  =>  '0664',
     ensure  =>  file,
   }
