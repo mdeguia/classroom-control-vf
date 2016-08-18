@@ -1,16 +1,36 @@
 class nginx {
   
+  case $::family {
+    'RedHat','Debian' : {
+      $package = 'nginx'
+      $owner = 'root'
+      $group = 'root'
+      $docroot = '/var/www'
+      $confdir = '/etc/nginx'
+      $logdir = '/var/log/nginx'
+ }
+ 
+    'Windows' : {
+      $package = 'nginx-service'
+      $owner = 'Administrator'
+      $group = 'Administrators'
+      $docroot = 'C:/ProgramData/nginx/html'
+      $confdir = 'C:/ProgramData/nginx'
+      $logdir = 'C:/ProgramData/nginx/logs'
+ }
+ default : {
+    notify { "This ${::family} is not supported. Rebuild your machine."},
+  }
+
+  
   File {
-    owner =>  'root',
-    group =>  'root',
+    owner =>  '$owner',
+    group =>  '$group',
     mode  =>  '0664',
     ensure  =>  file,
   }
   
-  $docroot  = '/var/www'
-  $confdir  = '/etc/nginx'
-
-  package { 'nginx':
+  package { $package:
     ensure  => present,
   }
   
@@ -19,13 +39,13 @@ class nginx {
   }
   
   file { "${confdir}/nginx.conf":
-    source  => 'puppet:///modules/nginx/nginx.conf',
-    require  =>  Package['nginx'],
+    source  => template('nginx/nginx.conf.erb'),
+    require  =>  Package["$package"],
   }
   
   file { "${confdir}/conf.d/default.conf":
-    source  =>  'puppet:///modules/nginx/default.conf',
-    require  =>  Package['nginx'],
+    source  =>  template('nginx/default.conf.erb'),
+    require  =>  Package["$package"],
   }
   
   file  { "${docroot}/index.html":
