@@ -43,8 +43,9 @@ node default {
   # Example:
   #   class { 'my_class': }
   if $::is_virtual == "true" {
-   notify { "This host is a virtual machine running on ${::virtual}": 
+   notify { "This host is a virtual machine running on ${::virtual}": }
   }
+  
   #  notify { "Test message for release v1.0.0.3": }
     
 #    file { 'motd' :
