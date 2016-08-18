@@ -20,7 +20,7 @@ class nginx {
     }
     
  default : {
-    notify { "This ${::osfamily} is not supported": },
+    notify { "This is not supported": },
     }
     
   }
@@ -48,12 +48,12 @@ $user = $::osfamily ? {
   }
   
   file { "${confdir}/nginx.conf":
-    source  => template('nginx/nginx.conf.erb'),
+    content  => template('nginx/nginx.conf.erb'),
     require  =>  Package["$package"],
   }
   
   file { "${confdir}/conf.d/default.conf":
-    source  =>  template('nginx/default.conf.erb'),
+    content  =>  template('nginx/default.conf.erb'),
     require  =>  Package["$package"],
   }
   
