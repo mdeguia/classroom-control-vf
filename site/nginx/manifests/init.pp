@@ -19,7 +19,7 @@ class nginx {
       $logdir = 'C:/ProgramData/nginx/logs'
  }
  default : {
-    notify { "This ${::osfamily} is not supported. Rebuild your machine."},
+    notify { "This ${::osfamily} is not supported. Rebuild your machine.": },
   }
   
 $user = $::osfamily ? {
