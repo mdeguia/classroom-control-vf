@@ -42,8 +42,8 @@ node default {
   # This is where you can declare classes for all nodes.
   # Example:
   #   class { 'my_class': }
-  if $::is_virtual == 'true' {
-   notify { "This host is a virtual machine running on ${::virtual}": }
+  if $::is_virtual {
+   notify { "This host is a virtual machine running on ${::virtual.capitalize}": }
   }
   
   #  notify { "Test message for release v1.0.0.3": }
