@@ -20,9 +20,8 @@ class nginx {
     }
     
  default : {
-    notify { "This is not supported": },
+    notify { "This is not supported": }
     }
-    
   }
   
 $user = $::osfamily ? {
