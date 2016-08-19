@@ -1,28 +1,12 @@
-class nginx {
-  
-  case $::osfamily {
-    'RedHat','Debian' : {
-      $package = 'nginx'
-      $owner = 'root'
-      $group = 'root'
-      $docroot = '/var/www'
-      $confdir = '/etc/nginx'
-      $logdir = '/var/log/nginx'
-    }
- 
-    'Windows' : {
-      $package = 'nginx-service'
-      $owner = 'Administrator'
-      $group = 'Administrators'
-      $docroot = 'C:/ProgramData/nginx/html'
-      $confdir = 'C:/ProgramData/nginx'
-      $logdir = 'C:/ProgramData/nginx/logs'
-    }
-    
- default : {
-    notify { "This is not supported": }
-    }
-  }
+class nginx (
+  $package  = $nginx::params::package,
+  $owner    = $nginx::params::owner,
+  $group    = $nginx::params::group,
+  $docroot  = $nginx::params::docroot,
+  $confdir  = $nginx::params::confdir,
+  $logdir   = $nginx::params::logdir,
+) inherits nginx::params {
+
   
 $user = $::osfamily ? {
  'redhat' => 'nginx',
