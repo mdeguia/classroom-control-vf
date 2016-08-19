@@ -43,7 +43,8 @@ node default {
   # Example:
   #   class { 'my_class': }
   if $::is_virtual {
-   notify { "This host is a virtual machine running on ${::virtual.capitalize}": }
+    $message = hiera('message')
+    notify { $message: }
   }
   
   #  notify { "Test message for release v1.0.0.3": }
